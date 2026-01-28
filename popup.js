@@ -105,17 +105,26 @@ document.addEventListener('DOMContentLoaded', () => {
     return translations[currentLang][key] || translations.en[key] || key;
   }
 
-  // Load saved language from storage
+  // Detect browser language
+  function detectBrowserLanguage() {
+    const browserLang = navigator.language || navigator.languages?.[0] || 'en';
+    return browserLang.toLowerCase().startsWith('ru') ? 'ru' : 'en';
+  }
+
+  // Load saved language from storage or detect from browser
   async function loadLanguage() {
     return new Promise((resolve) => {
       browserAPI.storage.local.get([LANG_KEY], (result) => {
         if (browserAPI.runtime.lastError) {
           console.warn('Error loading language:', browserAPI.runtime.lastError);
+          currentLang = detectBrowserLanguage();
           resolve();
           return;
         }
         if (result && result[LANG_KEY]) {
           currentLang = result[LANG_KEY];
+        } else {
+          currentLang = detectBrowserLanguage();
         }
         updateLangButtons();
         resolve();
