@@ -1,0 +1,471 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  width: 420px;
+  height: 500px;
+  background: #f5f5f5;
+  color: #333;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+header {
+  background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+  color: white;
+  padding: 12px 16px;
+  flex-shrink: 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+header .subtitle {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-switcher {
+  display: flex;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-btn:hover {
+  color: white;
+}
+
+.lang-btn.active {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.btn-refresh-icon {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: background 0.2s;
+}
+
+.btn-refresh-icon:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.btn-refresh-icon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-refresh-icon.is-loading svg {
+  animation: spin 1s linear infinite;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.status {
+  padding: 10px 16px;
+  background: #fff3cd;
+  color: #856404;
+  font-size: 13px;
+  text-align: center;
+  border-bottom: 1px solid #ffc107;
+}
+
+.status.error {
+  background: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+
+.status.success {
+  background: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.message {
+  padding: 30px 20px;
+  text-align: center;
+  color: #666;
+}
+
+.message p {
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.message a {
+  color: #1565C0;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.message a:hover {
+  text-decoration: underline;
+}
+
+.btn-go-amazon {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+  color: white !important;
+  border-radius: 6px;
+  text-decoration: none !important;
+}
+
+.btn-go-amazon:hover {
+  opacity: 0.9;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #1565C0;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading p {
+  margin-top: 12px;
+  color: #666;
+  font-size: 14px;
+}
+
+.orders-container {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.orders-list {
+  padding: 8px;
+}
+
+.order-card {
+  background: white;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.order-card:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.order-card:last-child {
+  margin-bottom: 0;
+}
+
+.order-content {
+  display: flex;
+  gap: 12px;
+}
+
+.order-image {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.product-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #f5f5f5;
+}
+
+.product-gallery {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.item-count {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1565C0;
+  color: white;
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.order-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.order-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.order-price {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #B12704;
+}
+
+.order-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.copy-btn {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.copy-btn:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.copy-btn.copied {
+  color: #2e7d32;
+  background: #e8f5e9;
+}
+
+.order-status {
+  font-size: 13px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: #f3e5f5;
+  color: #7b1fa2;
+  font-weight: 500;
+}
+
+.order-status.in-transit {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.order-status.arriving-today {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.order-status.shipped {
+  background: #fce4ec;
+  color: #c2185b;
+}
+
+.order-status.delivered {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.order-status.processing {
+  background: #f5f5f5;
+  color: #616161;
+}
+
+.order-status.just-ordered {
+  background: #fff8e1;
+  color: #f57c00;
+}
+
+.order-title {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.order-delivery {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.order-tracking {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.tracking-label {
+  font-size: 13px;
+  color: #999;
+}
+
+.tracking-number {
+  font-size: 13px;
+  color: #333;
+  font-family: monospace;
+  font-weight: 500;
+}
+
+.order-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn-track, .btn-details {
+  flex: 1;
+  padding: 10px 14px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn-track {
+  background: #1565C0;
+  color: white;
+}
+
+.btn-track:hover {
+  background: #1976D2;
+}
+
+.btn-track.disabled {
+  background: #ccc;
+  color: #888;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-details {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.btn-details:hover {
+  background: #e0e0e0;
+}
+
+.btn-refresh {
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-refresh:hover {
+  opacity: 0.9;
+}
