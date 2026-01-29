@@ -481,6 +481,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!text) return '';
     const div = document.createElement('div');
     div.textContent = text;
-    return div.innerHTML;
+    return div.innerHTML
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/\n/g, '&#10;')
+      .replace(/\r/g, '&#13;')
+      .replace(/\t/g, '&#9;');
   }
 });
